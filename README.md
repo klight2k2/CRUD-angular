@@ -1,9 +1,10 @@
-##CRUD app
 
-##Run json-server
-npm run dev
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
+## CRUD app
+
+## Run json-server
+npm run dev
 
 ## Development server
 

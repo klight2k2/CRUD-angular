@@ -1,1 +1,115 @@
-<p>edit-user works!</p>
+<div class="edit-container">
+  <h1>Edit</h1>
+  <div>
+    <form [formGroup]="editUserForm" *ngIf="dataLoaded" (submit)="updateUser()">
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            formControlName="username"
+            matInput
+            placeholder="Enter new username"
+          />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+
+          <mat-error
+            *ngIf="
+              editUserForm.controls['username'].hasError('required') &&
+              editUserForm.controls['username'].errors
+            "
+          >
+            Please enter username
+          </mat-error>
+          <mat-error
+            *ngIf="
+              editUserForm.controls['username'].errors &&
+              editUserForm.controls['username'].hasError('minLength')
+            "
+          >
+            minLength iss 6
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input formControlName="name" matInput placeholder="Enter new name" />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+
+          <mat-error
+            *ngIf="
+              editUserForm.controls['name'].hasError('required') &&
+              editUserForm.controls['name'].errors
+            "
+          >
+            Please enter name
+          </mat-error>
+          <mat-error
+            *ngIf="
+              editUserForm.controls['name'].errors &&
+              editUserForm.controls['name'].hasError('minLength')
+            "
+          >
+            minLength iss 6
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Website</mat-label>
+          <input
+            formControlName="website"
+            matInput
+            placeholder="Enter new website"
+          />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+
+          <mat-error
+            *ngIf="
+              editUserForm.controls['website'].hasError('required') &&
+              editUserForm.controls['website'].errors
+            "
+          >
+            Please enter website
+          </mat-error>
+          <mat-error
+            *ngIf="
+              editUserForm.controls['website'].errors &&
+              editUserForm.controls['website'].hasError('minLength')
+            "
+          >
+            minLength iss 6
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            formControlName="email"
+            matInput
+            placeholder="Enter new email"
+          />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <mat-error
+          *ngIf="
+            editUserForm.controls['email'].hasError('required') &&
+            !editUserForm.controls['email'].hasError('minLength')
+          "
+          >Email iss required
+        </mat-error>
+        <mat-error *ngIf="editUserForm.controls['email'].hasError('email')"
+          >Email is valid
+        </mat-error>
+      </p>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!editUserForm.valid"
+      >
+        Update user
+      </button>
+    </form>
+  </div>
+</div>

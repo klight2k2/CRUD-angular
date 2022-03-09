@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-
+import { User } from '../list-users/list-users.component';
 @Component({
   selector: 'app-view-user',
   templateUrl: './view-user.component.html',
@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ViewUserComponent implements OnInit {
   userId: string = '';
-  user: any;
+  user!: User;
   constructor(
     private userService: UserService,
     private activatedRoute: ActivatedRoute
@@ -24,5 +24,4 @@ export class ViewUserComponent implements OnInit {
       this.user = data;
     });
   }
- 
 }

@@ -18,7 +18,7 @@ export class AddUserComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private _snackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -36,13 +36,18 @@ export class AddUserComponent implements OnInit {
     });
   }
   createUser() {
-    this.userService.addUser(this.addUserForm.value).subscribe(
-      (data) => {
-        this._snackBar.open('User has been created!');
-      },
-      (err) => {
-        this._snackBar.open('Fail to create user!');
-      }
-    );
+    this.userService
+      .addUser(this.addUserForm.value)
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          this.snackBar.open('User has been created!');
+        },
+        error: (err) => {
+          console.log(err);
+          this.snackBar.open('Fail to create user!');
+        },
+      })
+      .unsubscribe();
   }
 }

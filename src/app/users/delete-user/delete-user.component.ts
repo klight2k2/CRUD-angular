@@ -6,27 +6,36 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-delete-user',
   templateUrl: './delete-user.component.html',
-  styleUrls: ['./delete-user.component.scss']
+  styleUrls: ['./delete-user.component.scss'],
 })
 export class DeleteUserComponent implements OnInit {
-  userId!:string;
-  constructor(private activatedRoute:ActivatedRoute,
-    private userService:UserService,
-    private _snackBar:MatSnackBar,
-    private router:Router) { }
+  userId!: string;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(data=>{
-      this.userId=data['id'];
-    })
-    if(this.userId){
-        this.userService.deleteUser(this.userId).subscribe(data=>{
-            this._snackBar.open("User delete successfully");
+    this.activatedRoute.params.subscribe((data) => {
+      this.userId = data['id'];
+      console.log(this.userId);
+    });
+    if (this.userId) {
+      this.userService
+        .deleteUser(this.userId)
+        .subscribe({
+          next: (data) => {
+            this.snackBar.open('User delete successfully');
             this.router.navigateByUrl('/users/list');
-        },err=>{
-          this._snackBar.open("Cannot delete user!");
+          },
+          error: (err) => {
+            console.log(err);
+            this.snackBar.open('Cannot delete user!');
+          },
         })
+        .unsubscribe();
     }
   }
-
 }

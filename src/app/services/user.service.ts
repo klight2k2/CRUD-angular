@@ -6,22 +6,22 @@ import { User } from '../users/list-users/list-users.component';
   providedIn: 'root',
 })
 export class UserService {
-  baseUrl: string = 'http://localhost:3000/api/';
+  baseUrl: string = 'http://localhost:8800/api/';
   constructor(private http: HttpClient) {}
 
   listUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.baseUrl + 'users');
   }
   viewUsers(id: string) {
-    return this.http.get(this.baseUrl + 'users/' + id);
+    return this.http.get<User>(this.baseUrl + 'users/' + id);
   }
-  addUser(userObj: any) {
-    return this.http.post(this.baseUrl + 'users', userObj);
+  addUser(userObj: User) {
+    return this.http.post<User>(this.baseUrl + 'users', userObj);
   }
   deleteUser(id: any) {
-    return this.http.delete(this.baseUrl + 'users/' + id);
+    return this.http.delete<User>(this.baseUrl + 'users/' + id);
   }
-  updateUser(userObj: any, id: any) {
-    return this.http.put(this.baseUrl + 'users/' + id, userObj);
+  updateUser(userObj: User, id: any) {
+    return this.http.put<User>(this.baseUrl + 'users/' + id, userObj);
   }
 }
